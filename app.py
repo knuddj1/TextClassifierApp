@@ -5,7 +5,7 @@ from op_text import DistilBert, LabelConverter
 app = Flask(__name__)
 CORS(app)
 
-modelPath = r'C:\Users\Dean\Downloads\distilbert5labels'
+modelPath = r'H:\roberta'
 model = DistilBert(modelPath)
 
 converter = LabelConverter({
