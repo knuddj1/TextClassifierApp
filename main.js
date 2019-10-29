@@ -239,6 +239,14 @@ class Tag{
 		this.element.setAttribute('focus-lost', '');
 	}
 
+	hover(){
+		this.tagInfo.visible(true);
+	}
+
+	hoverLost(){
+		this.tagInfo.visible(false);
+	}
+
 	clean(text){
 		return text.replace(INITREG, '');
 	}
@@ -255,6 +263,14 @@ class Tag{
 		var color = converter[sentimentInfo[0][1]];
 		this.element.style.backgroundColor = color;
 		this.recievedContent = true;
+
+		var confidenceScores = sentimentInfo[0][0];
+		var sentimentLabel = sentimentInfo[0][2];
+
+		this.tagInfo = new TagInfo(color, confidenceScores, sentimentLabel);
+		this.element.appendChild(this.tagInfo.element);
+		this.element.addEventListener('mouseenter', this.hover.bind(this));
+		this.element.addEventListener('mouseleave', this.hoverLost.bind(this));
 
 		if (this.previous){
 			this.awaitPrevious(this);
@@ -277,6 +293,30 @@ class Tag{
 		
 
 		
+	}
+}
+
+class TagInfo{
+	constructor(bgColor, confidenceScores, textLabel){
+		this.createElement(bgColor, confidenceScores, textLabel);
+	}
+
+	createElement(bgColor, confidenceScores, textLabel){
+		this.element = document.createElement('div');
+		confidenceScores.forEach(score => { 
+			this.element.appendChild(document.createTextNode("Label: " + score.toString() +"\n"));
+		})
+		// this.element.appendChild(document.createTextNode(confidenceScores));
+		this.element.appendChild(document.createTextNode("Sentiment: " +  textLabel));
+		this.element.style.backgroundColor = bgColor;
+	}
+
+	visible(isVisible){
+		if (isVisible){
+			this.element.setAttribute('visible', '');
+		}else{
+			this.element.removeAttribute('visible');
+		}
 	}
 }
 

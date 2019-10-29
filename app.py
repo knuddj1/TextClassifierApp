@@ -1,12 +1,12 @@
 import json
 from flask import Flask, render_template, request
 from flask_cors import CORS
-from op_text import DistilBert, LabelConverter
+from op_text import Roberta, LabelConverter
 app = Flask(__name__)
 CORS(app)
 
 modelPath = r'H:\roberta'
-model = DistilBert(modelPath)
+model = Roberta(modelPath)
 
 converter = LabelConverter({
 	0 : "Very Negative",
