@@ -14,7 +14,7 @@ joblib==0.14.0
 MarkupSafe==1.1.1
 numpy==1.17.3
 op-text==0.1.3
-Pillow==6.2.1
+Pillow==9.0.1
 python-dateutil==2.8.0
 pytorch-transformers==1.2.0
 regex==2019.8.19
